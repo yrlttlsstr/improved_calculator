@@ -127,7 +127,7 @@ public class CalcTest {
     @Test
     void divisionFractionByZero1() {
         String actual = Main.calculate("5/0", "/", "1/2");
-        assertEquals("0", actual);
+        assertEquals("Знаменатель равен нулю!", actual);
     }
 
     @Test

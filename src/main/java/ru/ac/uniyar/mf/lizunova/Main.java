@@ -41,11 +41,30 @@ public class Main {
         return new Fraction(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
     }
 
+    public static boolean CheckDenominZero(Fraction num) {
+        if(num.DenominIsZero()){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean CheckDenominsZero(Fraction num1, Fraction num2) {
+        if(CheckDenominZero(num1)){
+            return true;
+        }
+        if(CheckDenominZero(num2)){
+            return true;
+        }
+        return false;
+    }
+
     public static String calculate(String num1, String oper, String num2) {
         Fraction val1 = inputFraction(num1);
         Fraction val2 = inputFraction(num2);
 
-
+        if(CheckDenominsZero(val1, val2)){
+            return "Знаменатель равен нулю!";
+        }
 
         switch (oper) {
             case "+":

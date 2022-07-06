@@ -34,12 +34,7 @@ public class Fraction {
     }
     public Fraction(int numer, int denomin) {
         this.numer = numer;
-        if(denomin != 0) {
             this.denomin = denomin;
-        } else {
-            this.numer = 0;
-            this.denomin = 1;
-        }
         simplify();
     }
     public Fraction(int numer) {
@@ -62,6 +57,13 @@ public class Fraction {
 
     public boolean IsZero() {
         if((denomin == 0)||(numer == 0)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean DenominIsZero() {
+        if(denomin == 0){
             return true;
         }
         return false;
