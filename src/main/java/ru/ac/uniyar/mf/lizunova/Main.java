@@ -1,35 +1,31 @@
 package ru.ac.uniyar.mf.lizunova;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        String str = "";
-        str = in.nextLine();
-        String[] part = str.split(" ");
-        Fraction num1 = inputFraction(part[0]);
-        Fraction num2 = inputFraction(part[2]);
+        List<String> expression = new ArrayList<>();
 
-        switch (part[1]) {
-            case "+":
-                System.out.println(num1.sum(num2).toString());
-                break;
-            case "-":
-                System.out.println(num1.subtract(num2).toString());
-                break;
-            case "*":
-                System.out.println(num1.multiply(num2).toString());
-                break;
-            case "/":
-                if (num2.IsZero()) {
-                    System.out.println("Деление на ноль!");
-                } else {
-                    System.out.println(num1.div(num2).toString());
-                }
-                break;
+        Scanner in = new Scanner(System.in);
+        System.out.print("Введите кол-во выражений, которые хотите посчитать: \n");
+        int num = Check.inputInt(in);
+
+        for(int i = 0; i < num; i++) {
+            System.out.print("Выражение " + (i + 1) + "\n");
+
+            String str = Check.inputStr(in);
+            expression.add(str);
+        }
+
+        for(int i = 0; i < num; i++) {
+            String[] part = expression.get(i).split(" ");
+
+            String answer = calculate(part[0], part[1], part[2]);
+            System.out.println("Ответ на выражение " + (i+1));
+            System.out.println(answer);
         }
     }
 
@@ -41,30 +37,9 @@ public class Main {
         return new Fraction(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
     }
 
-    public static boolean CheckDenominZero(Fraction num) {
-        if(num.DenominIsZero()){
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean CheckDenominsZero(Fraction num1, Fraction num2) {
-        if(CheckDenominZero(num1)){
-            return true;
-        }
-        if(CheckDenominZero(num2)){
-            return true;
-        }
-        return false;
-    }
-
     public static String calculate(String num1, String oper, String num2) {
         Fraction val1 = inputFraction(num1);
         Fraction val2 = inputFraction(num2);
-
-        if(CheckDenominsZero(val1, val2)){
-            return "Знаменатель равен нулю!";
-        }
 
         switch (oper) {
             case "+":
@@ -74,11 +49,7 @@ public class Main {
             case "*":
                 return val1.multiply(val2).toString();
             case "/":
-                if (val2.IsZero()) {
-                    return "Деление на ноль!";
-                } else {
-                    return val1.div(val2).toString();
-                }
+                return val1.div(val2).toString();
             default:
                 return "Введена была неверная операция!";
         }
