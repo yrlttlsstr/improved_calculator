@@ -62,18 +62,12 @@ public class Fraction {
 
     // Метод проверяет равно ли число нулю.
     public boolean IsZero() {
-        if ((denomin == 0) || (numer == 0)) {
-            return true;
-        }
-        return false;
+        return (denomin == 0) || (numer == 0);
     }
 
     // Метод проверяет равен ли знаменатель нулю.
     public boolean DenominIsZero() {
-        if (denomin == 0) {
-            return true;
-        }
-        return false;
+        return denomin == 0;
     }
 
     // Метод перевода дроби в строку.

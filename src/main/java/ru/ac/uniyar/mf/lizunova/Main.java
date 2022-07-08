@@ -39,18 +39,18 @@ public class Main {
 
     public static String calculate(String num1, String oper, String num2) {
         // Проверка сделана для полноценной программы с просьбой повторного ввода, поэтому вынесу ее сюда для тестов.
-        boolean done = false;
+        boolean done;
         String str = num1 + " " + oper + " " + num2;
         done = Check.inputStrFormat(str);
-        if (done == true) {
+        if (done) {
             done = Check.inputStrInt(str);
-            if (done == true) {
+            if (done) {
                 done = Check.inputStrFract(str);
-                if (done == true) {
+                if (done) {
                     done = Check.inputStrOper(str);
-                    if (done == true) {
+                    if (done) {
                         done = Check.inputDivZero(str);
-                        if (done != true) {
+                        if (!done) {
                             return "Деление на ноль!";
                         }
                     } else {
