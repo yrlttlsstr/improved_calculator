@@ -85,13 +85,13 @@ public class Check {
         while (!done) {
             str = in.nextLine();
             done = inputStrFormat(str);
-            if (done == true) {
+            if (done) {
                 done = inputStrInt(str);
-                if (done == true) {
+                if (done) {
                     done = inputStrFract(str);
-                    if (done == true) {
+                    if (done) {
                         done = inputStrOper(str);
-                        if (done == true) {
+                        if (done) {
                             done = inputDivZero(str);
                         }
                     }
