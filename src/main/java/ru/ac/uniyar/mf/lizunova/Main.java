@@ -10,21 +10,21 @@ public class Main {
         List<String> expression = new ArrayList<>();
 
         Scanner in = new Scanner(System.in);
-        System.out.print("Р’РІРµРґРёС‚Рµ РєРѕР»-РІРѕ РІС‹СЂР°Р¶РµРЅРёР№, РєРѕС‚РѕСЂС‹Рµ С…РѕС‚РёС‚Рµ РїРѕСЃС‡РёС‚Р°С‚СЊ: \n");
+        System.out.print("Введите кол-во выражений, которые хотите посчитать: \n");
         int num = Check.inputInt(in);
 
-        for(int i = 0; i < num; i++) {
-            System.out.print("Р’С‹СЂР°Р¶РµРЅРёРµ " + (i + 1) + "\n");
+        for (int i = 0; i < num; i++) {
+            System.out.print("Выражение " + (i + 1) + "\n");
 
             String str = Check.inputStr(in);
             expression.add(str);
         }
 
-        for(int i = 0; i < num; i++) {
+        for (int i = 0; i < num; i++) {
             String[] part = expression.get(i).split(" ");
 
             String answer = calculate(part[0], part[1], part[2]);
-            System.out.println("РћС‚РІРµС‚ РЅР° РІС‹СЂР°Р¶РµРЅРёРµ " + (i+1));
+            System.out.println("Ответ на выражение " + (i + 1));
             System.out.println(answer);
         }
     }
@@ -38,6 +38,34 @@ public class Main {
     }
 
     public static String calculate(String num1, String oper, String num2) {
+        // Проверка сделана для полноценной программы с просьбой повторного ввода, поэтому вынесу ее сюда для тестов.
+        boolean done = false;
+        String str = num1 + " " + oper + " " + num2;
+        done = Check.inputStrFormat(str);
+        if (done == true) {
+            done = Check.inputStrInt(str);
+            if (done == true) {
+                done = Check.inputStrFract(str);
+                if (done == true) {
+                    done = Check.inputStrOper(str);
+                    if (done == true) {
+                        done = Check.inputDivZero(str);
+                        if (done != true) {
+                            return "Деление на ноль!";
+                        }
+                    } else {
+                        return "Введена была неверная операция!";
+                    }
+                } else {
+                    return "Знаменатель равен нулю!";
+                }
+            } else {
+                return "Вы ввели не число или не целое число!";
+            }
+        } else {
+            return "Вы ввели выражение в неправильном формате!";
+        }
+
         Fraction val1 = inputFraction(num1);
         Fraction val2 = inputFraction(num2);
 
@@ -51,7 +79,7 @@ public class Main {
             case "/":
                 return val1.div(val2).toString();
             default:
-                return "Р’РІРµРґРµРЅР° Р±С‹Р»Р° РЅРµРІРµСЂРЅР°СЏ РѕРїРµСЂР°С†РёСЏ!";
+                return "";
         }
     }
 }

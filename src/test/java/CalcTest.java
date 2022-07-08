@@ -127,12 +127,24 @@ public class CalcTest {
     @Test
     void divisionFractionByZero1() {
         String actual = Main.calculate("5/0", "/", "1/2");
-        assertEquals("Р—РЅР°РјРµРЅР°С‚РµР»СЊ СЂР°РІРµРЅ РЅСѓР»СЋ!", actual);
+        assertEquals("Знаменатель равен нулю!", actual);
     }
 
     @Test
     void divisionFractionByZero2() {
         String actual = Main.calculate("5/4", "/", "0");
-        assertEquals("Р”РµР»РµРЅРёРµ РЅР° РЅРѕР»СЊ!", actual);
+        assertEquals("Деление на ноль!", actual);
+    }
+
+    @Test
+    void inputNotInt() {
+        String actual = Main.calculate("g", "-", "h");
+        assertEquals("Вы ввели не число или не целое число!", actual);
+    }
+
+    @Test
+    void inputNotOper() {
+        String actual = Main.calculate("2", "j", "1");
+        assertEquals("Введена была неверная операция!", actual);
     }
 }
